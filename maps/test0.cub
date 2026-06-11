@@ -1,0 +1,11 @@
+NO ./textures/topBlocks_01.xpm
+EA ./textures/block.xpm
+WE ./textures/wall.xpm
+SO ./textures/midBlocks_01.xpm
+
+C 127 ,                           127 , 127              
+F 127              ,                       127,127
+
+ 1
+1E1
+ 1
