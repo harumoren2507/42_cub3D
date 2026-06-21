@@ -64,35 +64,3 @@ char	*ft_itoa(int nb)
 	str = ft_nb_to_char(str, n, i);
 	return (str);
 }
-/*
-#include <stdio.h>
-
-int	main(void)
-{
-	printf("%s\n", ft_itoa(-2147483648));
-}
-*/
-/*
-"abcde" 5文字
-
-sizeof(char) *(i + 1)
-5文字　＋　ヌル文字
-
-str[5] は'\0'
-
-
-1234
-
-"  4"
-123
-
-" 34"
-12
-
-" 234"
-1
-
-"1234"
-
-0
-*/

@@ -36,17 +36,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 		end--;
 	return (ft_substr(start, 0, end - start + 1));
 }
-/*
-int	main(int argc, char *argv[])
-{
-	char	*trimmed_result;
-
-	if (argc == 3)
-	{
-		trimmed_result = ft_strtrim(argv[1], argv[2]);
-		printf("%s¥\n", trimmed_result);
-		free(trimmed_result);
-	}
-	return (0);
-}
-*/

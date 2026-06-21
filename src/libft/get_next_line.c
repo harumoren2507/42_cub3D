@@ -13,8 +13,8 @@
 #include "get_next_line.h"
 
 /*
-** 静的バッファから改行より前の部分を取り出して返す。
-** 改行が見つかったら buf の残り部分だけを残す。
+** Extract the line before the newline character from the static buffer.
+** If a newline is found, keep only the remaining part of the buffer.
 */
 static char	*extract_line(char **buf)
 {
@@ -38,8 +38,8 @@ static char	*extract_line(char **buf)
 }
 
 /*
-** fdから読んだデータを静的バッファに溜め込む。
-** 改行かEOFが来るまで読み続ける。
+** Fill the static buffer with data read from fd.
+** Read continuously until a newline or EOF is reached.
 */
 static char	*fill_buffer(int fd, char *buf)
 {

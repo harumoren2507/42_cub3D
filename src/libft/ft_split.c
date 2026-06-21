@@ -104,30 +104,3 @@ char	**ft_split(char const *s, char c)
 	split_word(s, result, c);
 	return (result);
 }
-/*
-#include <stdio.h>
-
-int	main(int argc, char *argv[])
-{
-	char	**words;
-	int		i;
-
-	i = 0;
-	if (argc != 3)
-	{
-		printf("Usage: %s string charset\n", argv[0]);
-		return (0);
-	}
-	words = ft_split(argv[1], argv[2][0]);
-	while (words[i] != NULL)
-	{
-		printf("%s\n", words[i]);
-		free(words[i]);
-		i++;
-	}
-	if (words[i] == NULL)
-		printf("NULL\n");
-	free(words);
-	return (0);
-}
-*/
