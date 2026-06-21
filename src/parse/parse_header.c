@@ -31,6 +31,18 @@ static int	parse_tex_path(t_game *game, char *line, char *id, int idx)
 	return (1);
 }
 
+static int	count_parts(char **parts)
+{
+	int	i;
+
+	if (!parts)
+		return (0);
+	i = 0;
+	while (parts[i])
+		i++;
+	return (i);
+}
+
 static int	parse_rgb(t_game *game, char *str, int *color)
 {
 	char	**parts;
@@ -39,7 +51,7 @@ static int	parse_rgb(t_game *game, char *str, int *color)
 	int		b;
 
 	parts = ft_split(str, ',');
-	if (!parts || !parts[0] || !parts[1] || !parts[2] || parts[3])
+	if (count_parts(parts) != 3)
 	{
 		free_parts(parts);
 		return (set_error(game, "Color must be R,G,B"));
@@ -53,9 +65,10 @@ static int	parse_rgb(t_game *game, char *str, int *color)
 	g = ft_atoi(parts[1]);
 	b = ft_atoi(parts[2]);
 	free_parts(parts);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+	if (r < RGB_MIN || r > RGB_MAX || g < RGB_MIN || g > RGB_MAX
+		|| b < RGB_MIN || b > RGB_MAX)
 		return (set_error(game, "Color value out of range (0-255)"));
-	*color = (r << 16) | (g << 8) | b;
+	*color = (r << RED_SHIFT) | (g << GREEN_SHIFT) | b;
 	return (1);
 }
 
@@ -88,34 +101,39 @@ static int	parse_color(t_game *game, char *line, char id, int *flag)
 	return (1);
 }
 
-static int	to_status(int ret)
-{
-	if (ret < 0)
-		return (-1);
-	return (0);
-}
-
 int	parse_header_line(t_game *game, char *line)
 {
 	int	ret;
 
 	ret = parse_tex_path(game, line, "NO ", TEX_NO);
-	if (ret != 0)
-		return (to_status(ret));
+	if (ret == 1)
+		return (0);
+	if (ret == -1)
+		return (-1);
 	ret = parse_tex_path(game, line, "SO ", TEX_SO);
-	if (ret != 0)
-		return (to_status(ret));
+	if (ret == 1)
+		return (0);
+	if (ret == -1)
+		return (-1);
 	ret = parse_tex_path(game, line, "WE ", TEX_WE);
-	if (ret != 0)
-		return (to_status(ret));
+	if (ret == 1)
+		return (0);
+	if (ret == -1)
+		return (-1);
 	ret = parse_tex_path(game, line, "EA ", TEX_EA);
-	if (ret != 0)
-		return (to_status(ret));
+	if (ret == 1)
+		return (0);
+	if (ret == -1)
+		return (-1);
 	ret = parse_color(game, line, 'F', &game->floor_loaded);
-	if (ret != 0)
-		return (to_status(ret));
+	if (ret == 1)
+		return (0);
+	if (ret == -1)
+		return (-1);
 	ret = parse_color(game, line, 'C', &game->ceil_loaded);
-	if (ret != 0)
-		return (to_status(ret));
+	if (ret == 1)
+		return (0);
+	if (ret == -1)
+		return (-1);
 	return (set_error(game, "Unknown header line"));
 }

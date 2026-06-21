@@ -17,7 +17,7 @@ static int	is_blank_line(char *line)
 	int	i;
 
 	i = 0;
-	while (line[i] == ' ' || line[i] == '\t' || line[i] == '\r')
+	while (IS_WHITESPACE(line[i]))
 		i++;
 	return (line[i] == '\0' || line[i] == '\n');
 }
@@ -35,7 +35,7 @@ static int	handle_line(t_game *game, char *line)
 {
 	if (game->map_row_count > 0)
 		return (map_add_row(game, line));
-	if (line[0] == '1' || line[0] == ' ')
+	if (line[0] == CHAR_WALL || line[0] == CHAR_SPACE)
 		return (map_add_row(game, line));
 	return (parse_header_line(game, line));
 }

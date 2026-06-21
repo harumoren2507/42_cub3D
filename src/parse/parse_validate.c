@@ -31,10 +31,10 @@ static int	is_invalid_border(t_game *game, int y, int x)
 	if (y == 0 || y == game->map_h - 1
 		|| x == 0 || x == game->map_w - 1)
 		return (1);
-	if (game->map[y - 1][x] == ' '
-		|| game->map[y + 1][x] == ' '
-		|| game->map[y][x - 1] == ' '
-		|| game->map[y][x + 1] == ' ')
+	if (game->map[y - 1][x] == CHAR_SPACE
+		|| game->map[y + 1][x] == CHAR_SPACE
+		|| game->map[y][x - 1] == CHAR_SPACE
+		|| game->map[y][x + 1] == CHAR_SPACE)
 		return (1);
 	return (0);
 }
@@ -59,7 +59,7 @@ int	is_num_str(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+	while (IS_WHITESPACE(str[i]))
 		i++;
 	if (str[i] == '\0')
 		return (0);
@@ -67,7 +67,7 @@ int	is_num_str(char *str)
 	{
 		if (str[i] < '0' || str[i] > '9')
 		{
-			while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+			while (IS_WHITESPACE(str[i]))
 				i++;
 			if (str[i] == '\0')
 				return (1);
@@ -91,7 +91,7 @@ int	validate_map_closed(t_game *game)
 		while (++x < game->map_w)
 		{
 			c = game->map[y][x];
-			if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+			if (c == CHAR_FLOOR || c == 'N' || c == 'S' || c == 'E' || c == 'W')
 			{
 				if (is_invalid_border(game, y, x))
 					return (set_error(game, "Map is not closed"));

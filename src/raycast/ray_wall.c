@@ -19,8 +19,8 @@ static void	set_wall_dist(t_ray *ray, double player_angle)
 	else
 		ray->ray_dist = ray->side_y - ray->delta_y;
 	ray->wall_dist = ray->ray_dist * cos(ray->ray_angle - player_angle);
-	if (ray->wall_dist < 0.001)
-		ray->wall_dist = 0.001;
+	if (ray->wall_dist < MIN_WALL_DIST)
+		ray->wall_dist = MIN_WALL_DIST;
 }
 
 static void	set_wall_texture(t_ray *ray, t_textures *tex)

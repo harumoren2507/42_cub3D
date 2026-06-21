@@ -32,7 +32,7 @@ static void	free_parse_temps(t_game *game)
 	int	i;
 
 	i = 0;
-	while (i < 4)
+	while (i < TEXTURE_COUNT)
 	{
 		free(game->tex_paths[i]);
 		game->tex_paths[i] = NULL;

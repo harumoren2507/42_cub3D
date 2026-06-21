@@ -39,10 +39,10 @@ void	find_player_pos(t_game *game)
 			cell = game->map[y][x];
 			if (cell == 'N' || cell == 'S' || cell == 'E' || cell == 'W')
 			{
-				game->player.pos_x = x + 0.5;
-				game->player.pos_y = y + 0.5;
+				game->player.pos_x = x + CELL_CENTER;
+				game->player.pos_y = y + CELL_CENTER;
 				set_player_angle(&game->player, cell);
-				game->map[y][x] = '0';
+				game->map[y][x] = CHAR_FLOOR;
 				return ;
 			}
 			x++;
