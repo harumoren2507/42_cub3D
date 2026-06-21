@@ -1,0 +1,74 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_wall.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/18 22:16:48 by retoriya          #+#    #+#             */
+/*   Updated: 2026/06/21 11:35:48 by retoriya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../inc/cub3D.h"
+
+static void	set_wall_dist(t_ray *ray, double player_angle)
+{
+	if (ray->side == SIDE_EW)
+		ray->ray_dist = ray->side_x - ray->delta_x;
+	else
+		ray->ray_dist = ray->side_y - ray->delta_y;
+	ray->wall_dist = ray->ray_dist * cos(ray->ray_angle - player_angle);
+	if (ray->wall_dist < 0.001)
+		ray->wall_dist = 0.001;
+}
+
+static void	set_wall_texture(t_ray *ray, t_textures *tex)
+{
+	if (ray->side == SIDE_EW)
+	{
+		if (ray->dir_x < 0)
+			ray->texture = &tex->west;
+		else
+			ray->texture = &tex->east;
+	}
+	else
+	{
+		if (ray->dir_y < 0)
+			ray->texture = &tex->north;
+		else
+			ray->texture = &tex->south;
+	}
+}
+
+static void	set_tex_x(t_ray *ray, t_player *player)
+{
+	if (ray->side == SIDE_EW)
+		ray->wall_frac = player->pos_y + ray->ray_dist * ray->dir_y;
+	else
+		ray->wall_frac = player->pos_x + ray->ray_dist * ray->dir_x;
+	ray->wall_frac -= floor(ray->wall_frac);
+	ray->tex_x = (int)(ray->wall_frac * ray->texture->width);
+	if ((ray->side == SIDE_EW && ray->dir_x > 0)
+		|| (ray->side == SIDE_NS && ray->dir_y < 0))
+		ray->tex_x = ray->texture->width - ray->tex_x - 1;
+}
+
+static void	set_wall_bounds(t_ray *ray)
+{
+	ray->wall_height = (int)(WIN_H / ray->wall_dist);
+	ray->wall_top = WIN_H / 2 - ray->wall_height / 2;
+	ray->wall_bottom = WIN_H / 2 + ray->wall_height / 2;
+	if (ray->wall_top < 0)
+		ray->wall_top = 0;
+	if (ray->wall_bottom >= WIN_H)
+		ray->wall_bottom = WIN_H - 1;
+}
+
+void	prepare_wall_hit(t_ray *ray, t_game *game)
+{
+	set_wall_dist(ray, game->player.angle);
+	set_wall_texture(ray, &game->textures);
+	set_tex_x(ray, &game->player);
+	set_wall_bounds(ray);
+}
