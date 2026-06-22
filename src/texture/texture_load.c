@@ -6,7 +6,7 @@
 /*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 12:51:39 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/17 06:37:37 by retoriya         ###   ########.fr       */
+/*   Updated: 2026/06/22 22:35:51 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 int	load_texture(t_game *game, t_texture *tex, char *path)
 {
-	tex->img = mlx_xpm_file_to_image(game->screen.mlx,
-			path, &tex->width, &tex->height);
+	tex->img = mlx_xpm_file_to_image(game->screen.mlx, path, &tex->width,
+			&tex->height);
 	if (!tex->img)
 		return (set_error(game, "Failed to load texture (must be .xpm)"));
-	tex->addr = mlx_get_data_addr(tex->img,
-			&tex->bpp, &tex->line_len, &tex->endian);
+	tex->addr = mlx_get_data_addr(tex->img, &tex->bpp, &tex->line_len,
+			&tex->endian);
+	if (!tex->addr)
+		return (set_error(game, "mlx_get_data_addr failed"));
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 07:59:26 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/21 12:53:49 by retoriya         ###   ########.fr       */
+/*   Updated: 2026/06/22 22:37:01 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	setup_hooks(t_game *game)
 	mlx_hook(game->screen.win, EVT_KEYUP, 1L << 1, key_release, game);
 	mlx_hook(game->screen.win, EVT_DESTROY, 0, window_close, game);
 	mlx_loop_hook(game->screen.mlx, frame_hook, game);
+	mlx_expose_hook(game->screen.win, frame_hook, game);
 }
 
 int	main(int argc, char **argv)
