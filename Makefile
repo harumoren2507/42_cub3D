@@ -1,10 +1,34 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: maono <maono@student.42tokyo.jp>           +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/06/22 05:41:46 by maono             #+#    #+#              #
+#    Updated: 2026/06/22 06:02:42 by maono            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME		= cub3D
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -Iinc -Isrc/libft -Iminilibx-linux
-LIBFT		= src/libft/libft.a
-MLX			= minilibx-linux/libmlx.a
+MAKEFLAGS	+= --no-print-directory
 
-# Explicitly specify all source files
+LIBFT_DIR	= src/libft
+MLX_DIR		= minilibx-linux
+MLX_URL		= https://cdn.intra.42.fr/document/document/47450/minilibx-linux.tgz
+OBJ_DIR		= .obj
+DEP_DIR		= .dep
+
+LIBFT		= $(LIBFT_DIR)/libft.a
+MLX			= $(MLX_DIR)/libmlx.a
+
+CFLAGS		= -Wall -Wextra -Werror
+CPPFLAGS	= -Iinc -I$(LIBFT_DIR) -I$(MLX_DIR)
+LDFLAGS		= -L$(LIBFT_DIR) -L$(MLX_DIR)
+LDLIBS		= -lft -lmlx -lXext -lX11 -lm
+DEPFLAGS	= -MT $@ -MMD -MP -MF $(DEP_DIR)/$*.d
+
 SRCS		= src/main.c \
 			  src/init/init_game.c \
 			  src/init/init_player.c \
@@ -22,36 +46,45 @@ SRCS		= src/main.c \
 			  src/raycast/ray_setup.c \
 			  src/raycast/ray_wall.c
 
-# Derive object files from source files
-OBJS		= $(SRCS:.c=.o)
-
-LIBS		= -Lsrc/libft -lft -Lminilibx-linux -lmlx -lXext -lX11 -lm
+OBJS		= $(SRCS:src/%.c=$(OBJ_DIR)/%.o)
+DEPS		= $(SRCS:src/%.c=$(DEP_DIR)/%.d)
 
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(MLX) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 
 $(LIBFT):
-	@make -C src/libft
+	@$(MAKE) -C $(LIBFT_DIR)
 
-$(MLX):
-	@make -C minilibx-linux
+$(MLX_DIR):
+	@echo "Downloading minilibx..."
+	@wget -q $(MLX_URL) -O minilibx-linux.tgz
+	@tar -xzf minilibx-linux.tgz
+	@$(RM) minilibx-linux.tgz
+	@echo "minilibx downloaded!"
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(MLX): | $(MLX_DIR)
+	@$(MAKE) -C $(MLX_DIR)
+
+$(OBJ_DIR)/%.o: src/%.c
+	@mkdir -p $(@D) $(DEP_DIR)/$(dir $*)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(DEPFLAGS) -c $< -o $@
 
 clean:
-	@make -C src/libft clean
-	@make -C minilibx-linux clean
-	@rm -f $(OBJS)
+	@$(MAKE) -C $(LIBFT_DIR) clean
+	@[ -f $(MLX) ] && $(MAKE) -C $(MLX_DIR) clean || true
+	@rm -rf $(OBJ_DIR) $(DEP_DIR)
 
 fclean: clean
-	@make -C src/libft fclean
-	@rm -f $(NAME)
+	@$(RM) $(LIBFT) $(MLX) $(NAME)
 
 bonus: all
 
-re: fclean all
+re:
+	@$(MAKE) fclean
+	@$(MAKE) all
 
 .PHONY: all clean fclean re bonus
+
+-include $(DEPS)
