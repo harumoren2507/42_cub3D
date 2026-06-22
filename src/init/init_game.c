@@ -29,12 +29,15 @@ static int	open_window(t_game *game)
 	return (0);
 }
 
-static void	refresh_screen_addr(t_game *game)
+static int	refresh_screen_addr(t_game *game)
 {
 	t_screen	*s;
 
 	s = &game->screen;
 	s->addr = mlx_get_data_addr(s->img, &s->bpp, &s->line_len, &s->endian);
+	if (!s->addr)
+		return (set_error(game, "mlx_get_data_addr failed"));
+	return (0);
 }
 
 int	init_game(t_game *game)
@@ -44,6 +47,7 @@ int	init_game(t_game *game)
 	if (load_all_textures(game))
 		return (-1);
 	find_player_pos(game);
-	refresh_screen_addr(game);
+	if (refresh_screen_addr(game))
+		return (-1);
 	return (0);
 }
