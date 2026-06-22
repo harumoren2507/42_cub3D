@@ -12,6 +12,7 @@ SRCS		= src/main.c \
 			  src/parse/parse_header.c \
 			  src/parse/parse_map.c \
 			  src/parse/parse_validate.c \
+			  src/parse/parse_utils.c \
 			  src/texture/texture_load.c \
 			  src/input/input_key.c \
 			  src/input/frame_hook.c \

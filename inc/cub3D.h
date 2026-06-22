@@ -59,7 +59,6 @@
 
 # define MAP_MAX_H    1024
 
-/* Readability Macros */
 # define RGB_MIN       0
 # define RGB_MAX       255
 # define RED_SHIFT     16
@@ -71,10 +70,6 @@
 # define CHAR_WALL     '1'
 # define CHAR_FLOOR    '0'
 # define CHAR_SPACE    ' '
-
-# define IS_WHITESPACE(c) (c == ' ' || (c >= 9 && c <= 13))
-
-/* ------------------------------------------------------------------ */
 
 typedef struct s_texture
 {
@@ -157,8 +152,7 @@ typedef struct s_game
 	char		*error_msg;
 }	t_game;
 
-/* ------------------------------------------------------------------ */
-/* Parser & Validator */
+int		is_whitespace(char c);
 int		parse_cub_file(t_game *game, char *path);
 int		parse_header_line(t_game *game, char *line);
 int		map_add_row(t_game *game, char *line);
