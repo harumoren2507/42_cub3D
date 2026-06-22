@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3D.h"
+#include "cub3D.h"
 #include <X11/keysym.h>
 
 static int	is_key_pressed(Display *display, char *keymap, KeySym keysym)
