@@ -161,6 +161,7 @@ int		validate_map_chars(t_game *game);
 int		validate_parsed(t_game *game);
 int		validate_map_closed(t_game *game);
 void	free_parts(char **parts);
+int		count_parts(char **parts);
 int		is_num_str(char *str);
 
 /* Game Initialization & Textures */
