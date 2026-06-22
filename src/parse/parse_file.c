@@ -17,7 +17,7 @@ static int	is_blank_line(char *line)
 	int	i;
 
 	i = 0;
-	while (IS_WHITESPACE(line[i]))
+	while (is_whitespace(line[i]))
 		i++;
 	return (line[i] == '\0' || line[i] == '\n');
 }

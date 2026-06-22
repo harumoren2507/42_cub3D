@@ -59,7 +59,7 @@ int	is_num_str(char *str)
 	int	i;
 
 	i = 0;
-	while (IS_WHITESPACE(str[i]))
+	while (is_whitespace(str[i]))
 		i++;
 	if (str[i] == '\0')
 		return (0);
@@ -67,7 +67,7 @@ int	is_num_str(char *str)
 	{
 		if (str[i] < '0' || str[i] > '9')
 		{
-			while (IS_WHITESPACE(str[i]))
+			while (is_whitespace(str[i]))
 				i++;
 			if (str[i] == '\0')
 				return (1);

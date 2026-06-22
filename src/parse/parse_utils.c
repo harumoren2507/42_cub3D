@@ -23,3 +23,8 @@ int	count_parts(char **parts)
 		i++;
 	return (i);
 }
+
+int	is_whitespace(char c)
+{
+	return (c == ' ' || (c >= 9 && c <= 13));
+}
