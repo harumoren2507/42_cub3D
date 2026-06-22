@@ -56,13 +56,13 @@ static void	set_tex_x(t_ray *ray, t_player *player)
 
 static void	set_wall_bounds(t_ray *ray)
 {
-	ray->wall_height = (int)(WIN_H / ray->wall_dist);
-	ray->wall_top = WIN_H / 2 - ray->wall_height / 2;
-	ray->wall_bottom = WIN_H / 2 + ray->wall_height / 2;
+	ray->wall_height = (int)(WINDOW_HEIGHT / ray->wall_dist);
+	ray->wall_top = WINDOW_HEIGHT / 2 - ray->wall_height / 2;
+	ray->wall_bottom = WINDOW_HEIGHT / 2 + ray->wall_height / 2;
 	if (ray->wall_top < 0)
 		ray->wall_top = 0;
-	if (ray->wall_bottom >= WIN_H)
-		ray->wall_bottom = WIN_H - 1;
+	if (ray->wall_bottom >= WINDOW_HEIGHT)
+		ray->wall_bottom = WINDOW_HEIGHT - 1;
 }
 
 void	prepare_wall_hit(t_ray *ray, t_game *game)
