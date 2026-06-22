@@ -28,16 +28,16 @@ static void	set_wall_texture(t_ray *ray, t_textures *tex)
 	if (ray->side == SIDE_EW)
 	{
 		if (ray->dir_x < 0)
-			ray->texture = &tex->west;
-		else
 			ray->texture = &tex->east;
+		else
+			ray->texture = &tex->west;
 	}
 	else
 	{
 		if (ray->dir_y < 0)
-			ray->texture = &tex->north;
-		else
 			ray->texture = &tex->south;
+		else
+			ray->texture = &tex->north;
 	}
 }
 
