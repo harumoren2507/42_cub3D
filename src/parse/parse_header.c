@@ -31,16 +31,20 @@ static int	parse_tex_path(t_game *game, char *line, char *id, int idx)
 	return (1);
 }
 
-static int	count_parts(char **parts)
+static int	parse_textures(t_game *game, char *line)
 {
-	int	i;
+	int	ret;
 
-	if (!parts)
-		return (0);
-	i = 0;
-	while (parts[i])
-		i++;
-	return (i);
+	ret = parse_tex_path(game, line, "NO ", TEX_NO);
+	if (ret != 0)
+		return (ret);
+	ret = parse_tex_path(game, line, "SO ", TEX_SO);
+	if (ret != 0)
+		return (ret);
+	ret = parse_tex_path(game, line, "WE ", TEX_WE);
+	if (ret != 0)
+		return (ret);
+	return (parse_tex_path(game, line, "EA ", TEX_EA));
 }
 
 static int	parse_rgb(t_game *game, char *str, int *color)
@@ -105,22 +109,7 @@ int	parse_header_line(t_game *game, char *line)
 {
 	int	ret;
 
-	ret = parse_tex_path(game, line, "NO ", TEX_NO);
-	if (ret == 1)
-		return (0);
-	if (ret == -1)
-		return (-1);
-	ret = parse_tex_path(game, line, "SO ", TEX_SO);
-	if (ret == 1)
-		return (0);
-	if (ret == -1)
-		return (-1);
-	ret = parse_tex_path(game, line, "WE ", TEX_WE);
-	if (ret == 1)
-		return (0);
-	if (ret == -1)
-		return (-1);
-	ret = parse_tex_path(game, line, "EA ", TEX_EA);
+	ret = parse_textures(game, line);
 	if (ret == 1)
 		return (0);
 	if (ret == -1)
