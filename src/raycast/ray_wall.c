@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_wall.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: maono <maono@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/18 22:16:48 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/21 11:35:48 by retoriya         ###   ########.fr       */
+/*   Updated: 2026/06/23 04:23:28 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ static void	set_tex_x(t_ray *ray, t_player *player)
 
 static void	set_wall_bounds(t_ray *ray)
 {
-	ray->wall_height = (int)(WIN_H / ray->wall_dist);
+	double	dist_to_plane;
+
+	dist_to_plane = (WIN_W / 2.0) / tan(FOV / 2.0);
+	ray->wall_height = (int)(dist_to_plane / ray->wall_dist);
 	ray->wall_top = WIN_H / 2 - ray->wall_height / 2;
 	ray->wall_bottom = WIN_H / 2 + ray->wall_height / 2;
 	if (ray->wall_top < 0)
