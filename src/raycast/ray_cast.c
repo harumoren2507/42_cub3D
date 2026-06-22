@@ -24,7 +24,7 @@ int	raycast_frame(t_game *game)
 	while (col < WIN_W)
 	{
 		ray_angle = game->player.angle
-			+ atan((col + 0.5 - WIN_W / 2.0) / dist_to_plane);
+			+ atan2((col + 0.5 - WIN_W / 2.0) , dist_to_plane);
 		ray_setup(&ray, &game->player, ray_angle);
 		ray_march_to_wall(&ray, game->map);
 		ray_render_column(&ray, game, col);
