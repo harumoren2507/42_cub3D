@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
+#include <X11/X.h>
 
 static void	exit_error(t_game *game, char *msg)
 {
@@ -41,9 +42,7 @@ static void	check_args(int argc, char **argv)
 
 static void	setup_hooks(t_game *game)
 {
-	mlx_hook(game->screen.win, EVT_KEYDOWN, 1L << 0, key_press, game);
-	mlx_hook(game->screen.win, EVT_KEYUP, 1L << 1, key_release, game);
-	mlx_hook(game->screen.win, EVT_DESTROY, 0, window_close, game);
+	mlx_hook(game->screen.win, DestroyNotify, 0, window_close, game);
 	mlx_loop_hook(game->screen.mlx, frame_hook, game);
 	mlx_expose_hook(game->screen.win, frame_hook, game);
 }

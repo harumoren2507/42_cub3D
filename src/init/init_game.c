@@ -20,6 +20,7 @@ static int	open_window(t_game *game)
 	s->mlx = mlx_init();
 	if (!s->mlx)
 		return (set_error(game, "mlx_init failed"));
+	s->display = *(Display **)s->mlx;
 	s->win = mlx_new_window(s->mlx, WIN_W, WIN_H, WIN_T);
 	if (!s->win)
 		return (set_error(game, "mlx_new_window failed"));
