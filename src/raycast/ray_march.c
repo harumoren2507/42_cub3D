@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3D.h"
+#include "cub3D.h"
 
 void	ray_march_to_wall(t_ray *ray, char **map)
 {

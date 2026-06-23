@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3D.h"
+#include "cub3D.h"
 
 static void	put_pixel(t_screen *s, int x, int y, int color)
 {
@@ -39,7 +39,7 @@ void	ray_render_column(t_ray *ray, t_game *game, int col)
 	y = 0;
 	while (y < ray->wall_top)
 		put_pixel(&game->screen, col, y++, game->ceil_color);
-	clip_top = ray->wall_top - (WIN_H / 2 - ray->wall_height / 2);
+	clip_top = ray->wall_top - (WINDOW_HEIGHT / 2 - ray->wall_height / 2);
 	tex_step = (double)ray->texture->height / ray->wall_height;
 	tex_pos = clip_top * tex_step;
 	y = ray->wall_top;
@@ -50,6 +50,6 @@ void	ray_render_column(t_ray *ray, t_game *game, int col)
 		tex_pos += tex_step;
 		y++;
 	}
-	while (y < WIN_H)
+	while (y < WINDOW_HEIGHT)
 		put_pixel(&game->screen, col, y++, game->floor_color);
 }

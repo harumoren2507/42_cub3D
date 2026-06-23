@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3D.h"
+#include "cub3D.h"
 
 int	map_add_row(t_game *game, char *line)
 {
-	if (game->map_row_count >= MAP_MAX_H)
+	if (game->map_row_count >= MAP_MAX_HEIGHT)
 		return (set_error(game, "Map exceeds maximum height"));
 	game->map_rows[game->map_row_count] = ft_strdup(line);
 	if (!game->map_rows[game->map_row_count])

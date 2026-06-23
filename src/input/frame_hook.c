@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3D.h"
+#include "cub3D.h"
+#include <X11/keysym.h>
 
 static void	calc_move_delta(t_game *game, double *mx, double *my)
 {
@@ -57,10 +58,13 @@ static void	apply_movement(t_game *game)
 
 static void	apply_rotation(t_game *game)
 {
-	if (game->keys[KEY_LEFT])
-		game->player.angle -= ROT_SPEED;
-	if (game->keys[KEY_RIGHT])
-		game->player.angle += ROT_SPEED;
+	Display	*dpy;
+
+	dpy = game->screen.display;
+	if (is_key_pressed(dpy, keymap, XK_Left))
+		game->player.angle -= ROTATION_SPEED;
+	if (is_key_pressed(dpy, keymap, XK_Right))
+		game->player.angle += ROTATION_SPEED;
 }
 
 int	frame_hook(void *param)

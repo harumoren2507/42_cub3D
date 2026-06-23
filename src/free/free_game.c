@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3D.h"
+#include "cub3D.h"
 
 void	free_map(char **map, int h)
 {
@@ -70,6 +70,7 @@ void	free_game(t_game *game)
 		mlx_destroy_image(game->screen.mlx, game->screen.img);
 	if (game->screen.win)
 		mlx_destroy_window(game->screen.mlx, game->screen.win);
-	mlx_destroy_display(game->screen.mlx);
+	if (game->screen.mlx)
+		mlx_destroy_display(game->screen.mlx);
 	free(game->screen.mlx);
 }

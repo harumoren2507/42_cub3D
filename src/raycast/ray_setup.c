@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3D.h"
+#include "cub3D.h"
 
 static void	set_ray_direction(t_ray *ray, t_player *player, double ray_angle)
 {
