@@ -72,9 +72,9 @@ static void	apply_rotation(t_game *game, char *keymap)
 
 	dpy = game->screen.display;
 	if (is_key_pressed(dpy, keymap, XK_Left))
-		game->player.angle -= ROT_SPEED;
+		game->player.angle -= ROTATION_SPEED;
 	if (is_key_pressed(dpy, keymap, XK_Right))
-		game->player.angle += ROT_SPEED;
+		game->player.angle += ROTATION_SPEED;
 }
 
 int	frame_hook(void *param)

@@ -21,10 +21,10 @@ static int	open_window(t_game *game)
 	if (!s->mlx)
 		return (set_error(game, "mlx_init failed"));
 	s->display = *(Display **)s->mlx;
-	s->win = mlx_new_window(s->mlx, WIN_W, WIN_H, WIN_T);
+	s->win = mlx_new_window(s->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
 	if (!s->win)
 		return (set_error(game, "mlx_new_window failed"));
-	s->img = mlx_new_image(s->mlx, WIN_W, WIN_H);
+	s->img = mlx_new_image(s->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!s->img)
 		return (set_error(game, "mlx_new_image failed"));
 	return (0);

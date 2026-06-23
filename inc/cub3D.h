@@ -20,9 +20,9 @@
 # include <mlx.h>
 # include "libft.h"
 
-# define WIN_W   1280
-# define WIN_H   720
-# define WIN_T   "cub3D"
+# define WINDOW_WIDTH   1280
+# define WINDOW_HEIGHT   720
+# define WINDOW_TITLE   "cub3D"
 
 # define FOV     1.0472
 
@@ -36,9 +36,9 @@
 # define TEXTURE_COUNT 4
 
 # define MOVE_SPEED  0.05
-# define ROT_SPEED   0.03
+# define ROTATION_SPEED   0.03
 
-# define MAP_MAX_H    1024
+# define MAP_MAX_HEIGHT    1024
 
 # define RGB_MIN       0
 # define RGB_MAX       255
@@ -128,7 +128,7 @@ typedef struct s_game
 	int			tex_loaded[TEXTURE_COUNT];
 	int			floor_loaded;
 	int			ceil_loaded;
-	char		*map_rows[MAP_MAX_H];
+	char		*map_rows[MAP_MAX_HEIGHT];
 	int			map_row_count;
 	char		*error_msg;
 }	t_game;
