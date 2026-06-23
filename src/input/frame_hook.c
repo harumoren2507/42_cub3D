@@ -11,46 +11,35 @@
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
-#include <X11/keysym.h>
 
-static int	is_key_pressed(Display *display, char *keymap, KeySym keysym)
-{
-	KeyCode	kc;
-
-	kc = XKeysymToKeycode(display, keysym);
-	return (keymap[kc / 8] & (1 << (kc % 8)));
-}
-
-static void	calc_move_delta(t_game *game, char *keymap, double *mx, double *my)
+static void	calc_move_delta(t_game *game, double *mx, double *my)
 {
 	t_player	*p;
-	Display		*dpy;
 
 	p = &game->player;
-	dpy = game->screen.display;
-	if (is_key_pressed(dpy, keymap, XK_w))
+	if (game->keys[KEY_W])
 	{
 		*mx += cos(p->angle) * MOVE_SPEED;
 		*my += sin(p->angle) * MOVE_SPEED;
 	}
-	if (is_key_pressed(dpy, keymap, XK_s))
+	if (game->keys[KEY_S])
 	{
 		*mx -= cos(p->angle) * MOVE_SPEED;
 		*my -= sin(p->angle) * MOVE_SPEED;
 	}
-	if (is_key_pressed(dpy, keymap, XK_a))
+	if (game->keys[KEY_A])
 	{
 		*mx += sin(p->angle) * MOVE_SPEED;
 		*my -= cos(p->angle) * MOVE_SPEED;
 	}
-	if (is_key_pressed(dpy, keymap, XK_d))
+	if (game->keys[KEY_D])
 	{
 		*mx -= sin(p->angle) * MOVE_SPEED;
 		*my += cos(p->angle) * MOVE_SPEED;
 	}
 }
 
-static void	apply_movement(t_game *game, char *keymap)
+static void	apply_movement(t_game *game)
 {
 	t_player	*p;
 	double		move_x;
@@ -59,35 +48,28 @@ static void	apply_movement(t_game *game, char *keymap)
 	p = &game->player;
 	move_x = 0;
 	move_y = 0;
-	calc_move_delta(game, keymap, &move_x, &move_y);
+	calc_move_delta(game, &move_x, &move_y);
 	if (game->map[(int)p->pos_y][(int)(p->pos_x + move_x)] == CHAR_FLOOR)
 		p->pos_x += move_x;
 	if (game->map[(int)(p->pos_y + move_y)][(int)p->pos_x] == CHAR_FLOOR)
 		p->pos_y += move_y;
 }
 
-static void	apply_rotation(t_game *game, char *keymap)
+static void	apply_rotation(t_game *game)
 {
-	Display	*dpy;
-
-	dpy = game->screen.display;
-	if (is_key_pressed(dpy, keymap, XK_Left))
+	if (game->keys[KEY_LEFT])
 		game->player.angle -= ROT_SPEED;
-	if (is_key_pressed(dpy, keymap, XK_Right))
+	if (game->keys[KEY_RIGHT])
 		game->player.angle += ROT_SPEED;
 }
 
 int	frame_hook(void *param)
 {
 	t_game	*game;
-	char	keymap[32];
 
 	game = (t_game *)param;
-	XQueryKeymap(game->screen.display, keymap);
-	if (is_key_pressed(game->screen.display, keymap, XK_Escape))
-		window_close(game);
-	apply_movement(game, keymap);
-	apply_rotation(game, keymap);
+	apply_movement(game);
+	apply_rotation(game);
 	raycast_frame(game);
 	return (0);
 }
