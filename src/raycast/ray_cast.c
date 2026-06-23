@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3D.h"
+#include "cub3D.h"
 
 int	raycast_frame(t_game *game)
 {
@@ -24,7 +24,7 @@ int	raycast_frame(t_game *game)
 	while (col < WINDOW_WIDTH)
 	{
 		ray_angle = game->player.angle
-			+ atan((col + 0.5 - WINDOW_WIDTH / 2.0) / dist_to_plane);
+		atan2((col + 0.5 - WINDOW_WIDTH / 2.0) / dist_to_plane);
 		ray_setup(&ray, &game->player, ray_angle);
 		ray_march_to_wall(&ray, game->map);
 		ray_render_column(&ray, game, col);
