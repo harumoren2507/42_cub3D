@@ -1,0 +1,3 @@
+# This marker file documents the case name.
+# The runner passes tests/errors/file/does_not_exist.cub for this case,
+# because testing "file not found" requires the target path to be absent.
