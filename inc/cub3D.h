@@ -6,62 +6,58 @@
 /*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 09:15:23 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/19 16:42:07 by retoriya         ###   ########.fr       */
+/*   Updated: 2026/06/24 01:34:55 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <math.h>
-# include <fcntl.h>
-# include <stdbool.h>
 # include <X11/Xlib.h>
 # include <mlx.h>
-# include "libft.h"
 
-# define WINDOW_WIDTH   1280
-# define WINDOW_HEIGHT   720
-# define WINDOW_TITLE   "cub3D"
+# define WINDOW_WIDTH 1280
+# define WINDOW_HEIGHT 720
+# define WINDOW_TITLE "cub3D"
 
-# define FOV     1.0472
+# define FOV 1.0472
 
-# define SIDE_EW  0
-# define SIDE_NS  1
+# define SIDE_EW 0
+# define SIDE_NS 1
 
-# define TEX_NO   0
-# define TEX_SO   1
-# define TEX_WE   2
-# define TEX_EA   3
+# define TEX_NO 0
+# define TEX_SO 1
+# define TEX_WE 2
+# define TEX_EA 3
 # define TEXTURE_COUNT 4
 
-# define MOVE_SPEED  0.05
-# define ROTATION_SPEED   0.03
+# define MOVE_SPEED 0.05
+# define ROTATION_SPEED 0.03
 
-# define MAP_MAX_HEIGHT    1024
+# define MAP_MAX_HEIGHT 1024
 
-# define RGB_MIN       0
-# define RGB_MAX       255
-# define RED_SHIFT     16
-# define GREEN_SHIFT   8
+# define RGB_MIN 0
+# define RGB_MAX 255
+# define RED_SHIFT 16
+# define GREEN_SHIFT 8
 
 # define MIN_WALL_DIST 0.001
-# define CELL_CENTER   0.5
+# define CELL_CENTER 0.5
 
-# define CHAR_WALL     '1'
-# define CHAR_FLOOR    '0'
-# define CHAR_SPACE    ' '
+# define CHAR_WALL '1'
+# define CHAR_FLOOR '0'
+# define CHAR_SPACE ' '
 
 typedef struct s_texture
 {
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	int		width;
-	int		height;
-}	t_texture;
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			line_len;
+	int			endian;
+	int			width;
+	int			height;
+}				t_texture;
 
 typedef struct s_textures
 {
@@ -69,7 +65,7 @@ typedef struct s_textures
 	t_texture	south;
 	t_texture	east;
 	t_texture	west;
-}	t_textures;
+}				t_textures;
 
 typedef struct s_ray
 {
@@ -93,14 +89,14 @@ typedef struct s_ray
 	int			wall_bottom;
 	t_texture	*texture;
 	int			tex_x;
-}	t_ray;
+}				t_ray;
 
 typedef struct s_player
 {
-	double	pos_x;
-	double	pos_y;
-	double	angle;
-}	t_player;
+	double		pos_x;
+	double		pos_y;
+	double		angle;
+}				t_player;
 
 typedef struct s_screen
 {
@@ -112,7 +108,7 @@ typedef struct s_screen
 	int			line_len;
 	int			endian;
 	Display		*display;
-}	t_screen;
+}				t_screen;
 
 typedef struct s_game
 {
@@ -131,40 +127,40 @@ typedef struct s_game
 	char		*map_rows[MAP_MAX_HEIGHT];
 	int			map_row_count;
 	char		*error_msg;
-}	t_game;
+}				t_game;
 
-int		is_whitespace(char c);
-int		parse_cub_file(t_game *game, char *path);
-int		parse_header_line(t_game *game, char *line);
-int		map_add_row(t_game *game, char *line);
-int		build_map(t_game *game);
-int		validate_map_chars(t_game *game);
-int		validate_parsed(t_game *game);
-int		validate_map_closed(t_game *game);
-void	free_parts(char **parts);
-int		count_parts(char **parts);
-int		is_num_str(char *str);
+int				is_whitespace(char c);
+int				parse_cub_file(t_game *game, char *path);
+int				parse_header_line(t_game *game, char *line);
+int				map_add_row(t_game *game, char *line);
+int				build_map(t_game *game);
+int				validate_map_chars(t_game *game);
+int				validate_parsed(t_game *game);
+int				validate_map_closed(t_game *game);
+void			free_parts(char **parts);
+int				count_parts(char **parts);
+int				is_num_str(char *str);
 
 /* Game Initialization & Textures */
-int		init_game(t_game *game);
-void	find_player_pos(t_game *game);
-int		load_texture(t_game *game, t_texture *tex, char *path);
-int		load_all_textures(t_game *game);
+int				init_game(t_game *game);
+void			find_player_pos(t_game *game);
+int				load_texture(t_game *game, t_texture *tex, char *path);
+int				load_all_textures(t_game *game);
 
 /* User Input & Event Hooks */
-int		window_close(void *param);
-int		frame_hook(void *param);
+int				window_close(void *param);
+int				frame_hook(void *param);
 
 /* Raycasting Engine */
-void	ray_setup(t_ray *ray, t_player *player, double ray_angle);
-void	ray_march_to_wall(t_ray *ray, char **map);
-void	prepare_wall_hit(t_ray *ray, t_game *game);
-void	ray_render_column(t_ray *ray, t_game *game, int col);
-int		raycast_frame(t_game *game);
+void			ray_setup(t_ray *ray, t_player *player, double ray_angle);
+void			ray_march_to_wall(t_ray *ray, char **map);
+void			prepare_wall_hit(t_ray *ray, t_game *game);
+void			ray_render_column(t_ray *ray, t_game *game, int col);
+int				raycast_frame(t_game *game);
 
 /* Memory Cleanup */
-void	free_map(char **map, int h);
-void	free_game(t_game *game);
-int		set_error(t_game *game, char *msg);
+void			free_map(char **map, int h);
+void			free_game(t_game *game);
+int				set_error(t_game *game, char *msg);
 
 #endif

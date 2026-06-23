@@ -6,12 +6,13 @@
 /*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/18 00:31:40 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/18 10:44:58 by retoriya         ###   ########.fr       */
+/*   Updated: 2026/06/24 01:28:15 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include <X11/keysym.h>
+#include <math.h>
 
 static int	is_key_pressed(Display *display, char *keymap, KeySym keysym)
 {

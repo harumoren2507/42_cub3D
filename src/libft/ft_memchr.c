@@ -31,8 +31,9 @@ void	*ft_memchr(const void *s, int c, size_t n)
 /*
 int	main(void)
 {
-	char *str;
-	char buf[] = "ABCD35dhaa5aa";
+	char	*str;
+	char	buf[] = "ABCD35dhaa5aa";
+
 	str = (char *)ft_memchr(buf, '5', sizeof(buf));
 	if (str != NULL)
 		printf("%s\n", str);

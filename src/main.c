@@ -6,11 +6,12 @@
 /*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 07:59:26 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/22 22:37:01 by maono            ###   ########.fr       */
+/*   Updated: 2026/06/24 01:30:24 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D.h"
+#include "cub3D.h"
+#include "libft.h"
 #include <X11/X.h>
 
 static void	exit_error(t_game *game, char *msg)

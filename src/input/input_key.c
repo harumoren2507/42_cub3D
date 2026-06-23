@@ -6,11 +6,13 @@
 /*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 04:25:24 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/14 13:23:12 by retoriya         ###   ########.fr       */
+/*   Updated: 2026/06/24 01:32:51 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include <stdlib.h>
+#include <unistd.h>
 
 int	window_close(void *param)
 {
@@ -18,5 +20,5 @@ int	window_close(void *param)
 
 	game = (t_game *)param;
 	free_game(game);
-	exit(0);
+	exit(EXIT_FAILURE);
 }

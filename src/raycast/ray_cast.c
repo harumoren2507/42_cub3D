@@ -6,11 +6,12 @@
 /*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/13 15:53:04 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/20 01:00:50 by retoriya         ###   ########.fr       */
+/*   Updated: 2026/06/24 01:28:29 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include <math.h>
 
 int	raycast_frame(t_game *game)
 {
