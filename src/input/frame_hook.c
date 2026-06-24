@@ -49,10 +49,10 @@ static void	apply_movement(t_game *game)
 	p = &game->player;
 	move_x = 0;
 	move_y = 0;
-	calc_move_delta(game, &move_x, &move_y);
-	if (game->map[(int)p->pos_y][(int)(p->pos_x + move_x)] == CHAR_FLOOR)
+	calc_move_delta(game, keymap, &move_x, &move_y);
+	if (game->map[(int)p->pos_y][(int)(p->pos_x + move_x)] == MAP_FLOOR)
 		p->pos_x += move_x;
-	if (game->map[(int)(p->pos_y + move_y)][(int)p->pos_x] == CHAR_FLOOR)
+	if (game->map[(int)(p->pos_y + move_y)][(int)p->pos_x] == MAP_FLOOR)
 		p->pos_y += move_y;
 }
 

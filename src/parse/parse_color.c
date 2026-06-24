@@ -1,53 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_header.c                                     :+:      :+:    :+:   */
+/*   parse_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: maono <maono@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/16 15:53:24 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/24 01:06:34 by maono            ###   ########.fr       */
+/*   Created: 2026/06/24 01:00:44 by maono             #+#    #+#             */
+/*   Updated: 2026/06/24 01:14:55 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-#include "parse_internal.h"
 #include "libft.h"
-#include <stdlib.h>
+#include "parse_internal.h"
 
-static int	parse_tex_path(t_game *game, char *line, char *id, int idx)
+static int	is_valid_rgb_commas(char *str)
 {
-	char	*path;
+	int	i;
+	int	commas;
 
-	if (ft_strncmp(line, id, ft_strlen(id)) != 0)
+	i = 0;
+	commas = 0;
+	if (str[0] == ',' || str[0] == '\0')
 		return (0);
-	if (game->tex_loaded[idx])
-		return (set_error(game, "Duplicate texture definition"));
-	path = ft_strtrim(line + ft_strlen(id), " \t");
-	if (!path || path[0] == '\0')
+	while (str[i])
 	{
-		free(path);
-		return (set_error(game, "Empty texture path"));
+		if (str[i] == ',')
+		{
+			commas++;
+			if (str[i + 1] == ',' || str[i + 1] == '\0')
+				return (0);
+		}
+		i++;
 	}
-	game->tex_paths[idx] = path;
-	game->tex_loaded[idx] = 1;
-	return (1);
-}
-
-static int	parse_textures(t_game *game, char *line)
-{
-	int	ret;
-
-	ret = parse_tex_path(game, line, "NO ", TEX_NO);
-	if (ret != 0)
-		return (ret);
-	ret = parse_tex_path(game, line, "SO ", TEX_SO);
-	if (ret != 0)
-		return (ret);
-	ret = parse_tex_path(game, line, "WE ", TEX_WE);
-	if (ret != 0)
-		return (ret);
-	return (parse_tex_path(game, line, "EA ", TEX_EA));
+	return (commas == 2);
 }
 
 static int	parse_rgb(t_game *game, char *str, int *color)
@@ -57,12 +43,11 @@ static int	parse_rgb(t_game *game, char *str, int *color)
 	int		g;
 	int		b;
 
+	if (!is_valid_rgb_commas(str))
+		return (set_error(game, "Color must be R,G,B"));
 	parts = ft_split(str, ',');
 	if (count_parts(parts) != 3)
-	{
-		free_parts(parts);
-		return (set_error(game, "Color must be R,G,B"));
-	}
+		return (free_parts(parts), set_error(game, "Color must be R,G,B"));
 	if (!is_num_str(parts[0]) || !is_num_str(parts[1]) || !is_num_str(parts[2]))
 	{
 		free_parts(parts);
@@ -79,7 +64,7 @@ static int	parse_rgb(t_game *game, char *str, int *color)
 	return (1);
 }
 
-static int	parse_color(t_game *game, char *line, char id, int *flag)
+int	parse_color(t_game *game, char *line, char id, int *flag)
 {
 	char	*rgb_str;
 	int		color;
@@ -106,26 +91,4 @@ static int	parse_color(t_game *game, char *line, char id, int *flag)
 		game->ceil_color = color;
 	*flag = 1;
 	return (1);
-}
-
-int	parse_header_line(t_game *game, char *line)
-{
-	int	ret;
-
-	ret = parse_textures(game, line);
-	if (ret == 1)
-		return (0);
-	if (ret == -1)
-		return (-1);
-	ret = parse_color(game, line, 'F', &game->floor_loaded);
-	if (ret == 1)
-		return (0);
-	if (ret == -1)
-		return (-1);
-	ret = parse_color(game, line, 'C', &game->ceil_loaded);
-	if (ret == 1)
-		return (0);
-	if (ret == -1)
-		return (-1);
-	return (set_error(game, "Unknown header line"));
 }

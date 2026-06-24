@@ -1,0 +1,2 @@
+This marker documents the no-argument argv error case.
+The runner executes ./cub3D with no map argument for this case.

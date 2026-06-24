@@ -54,9 +54,9 @@
 # define MIN_WALL_DIST 0.001
 # define CELL_CENTER 0.5
 
-# define CHAR_WALL '1'
-# define CHAR_FLOOR '0'
-# define CHAR_SPACE ' '
+# define MAP_WALL      '1'
+# define MAP_FLOOR     '0'
+# define MAP_VOID      ' '
 
 typedef struct s_texture
 {

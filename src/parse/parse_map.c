@@ -56,7 +56,7 @@ static char	*pad_row(char *raw, int width)
 	i = len;
 	while (i < width)
 	{
-		padded[i] = CHAR_SPACE;
+		padded[i] = MAP_VOID;
 		i++;
 	}
 	return (padded);
@@ -79,7 +79,7 @@ int	validate_map_chars(t_game *game)
 			c = game->map[y][x];
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 				players++;
-			else if (c != CHAR_FLOOR && c != CHAR_WALL && c != CHAR_SPACE)
+			else if (c != MAP_FLOOR && c != MAP_WALL && c != MAP_VOID)
 				return (set_error(game, "Invalid character in map"));
 			x++;
 		}

@@ -1,0 +1,2 @@
+This marker documents the too-many-arguments argv error case.
+The runner executes ./cub3D with two map arguments for this case.

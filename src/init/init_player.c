@@ -43,7 +43,7 @@ void	find_player_pos(t_game *game)
 				game->player.pos_x = x + CELL_CENTER;
 				game->player.pos_y = y + CELL_CENTER;
 				set_player_angle(&game->player, cell);
-				game->map[y][x] = CHAR_FLOOR;
+				game->map[y][x] = MAP_FLOOR;
 				return ;
 			}
 			x++;
