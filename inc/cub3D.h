@@ -13,10 +13,10 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <math.h>
 # include <fcntl.h>
-# include <stdbool.h>
+# include <math.h>
 # include <mlx.h>
+# include <stdbool.h>
 
 # define WINDOW_WIDTH 1280
 # define WINDOW_HEIGHT 720
@@ -33,16 +33,16 @@
 # define TEX_EA 3
 # define TEXTURE_COUNT 4
 
-# define KEY_W     0
-# define KEY_A     1
-# define KEY_S     2
-# define KEY_D     3
-# define KEY_LEFT  4
+# define KEY_W 0
+# define KEY_A 1
+# define KEY_S 2
+# define KEY_D 3
+# define KEY_LEFT 4
 # define KEY_RIGHT 5
 # define KEY_COUNT 6
 
-# define MOVE_SPEED  0.05
-# define ROTATION_SPEED   0.03
+# define MOVE_SPEED 0.05
+# define ROTATION_SPEED 0.03
 
 # define MAP_MAX_HEIGHT 1024
 
@@ -54,9 +54,9 @@
 # define MIN_WALL_DIST 0.001
 # define CELL_CENTER 0.5
 
-# define MAP_WALL      '1'
-# define MAP_FLOOR     '0'
-# define MAP_VOID      ' '
+# define MAP_WALL '1'
+# define MAP_FLOOR '0'
+# define MAP_VOID ' '
 
 typedef struct s_texture
 {
@@ -79,6 +79,7 @@ typedef struct s_textures
 
 typedef struct s_ray
 {
+	double		dist_to_plane;
 	double		ray_angle;
 	double		ray_dist;
 	double		dir_x;
@@ -110,14 +111,14 @@ typedef struct s_player
 
 typedef struct s_screen
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}	t_screen;
+	void		*mlx;
+	void		*win;
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			line_len;
+	int			endian;
+}				t_screen;
 
 typedef struct s_game
 {
@@ -158,10 +159,10 @@ int				load_texture(t_game *game, t_texture *tex, char *path);
 int				load_all_textures(t_game *game);
 
 /* User Input & Event Hooks */
-int		key_press(int key, void *param);
-int		key_release(int key, void *param);
-int		window_close(void *param);
-int		frame_hook(void *param);
+int				key_press(int key, void *param);
+int				key_release(int key, void *param);
+int				window_close(void *param);
+int				frame_hook(void *param);
 
 /* Raycasting Engine */
 void			ray_setup(t_ray *ray, t_player *player, double ray_angle);

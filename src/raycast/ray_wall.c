@@ -6,7 +6,7 @@
 /*   By: maono <maono@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/18 22:16:48 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/23 04:23:28 by maono            ###   ########.fr       */
+/*   Updated: 2026/06/25 01:13:32 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	set_tex_x(t_ray *ray, t_player *player)
 
 static void	set_wall_bounds(t_ray *ray)
 {
-	ray->wall_height = (int)(WINDOW_HEIGHT / ray->wall_dist);
+	ray->wall_height = (int)(ray->dist_to_plane / ray->wall_dist);
 	ray->wall_top = WINDOW_HEIGHT / 2 - ray->wall_height / 2;
 	ray->wall_bottom = WINDOW_HEIGHT / 2 + ray->wall_height / 2;
 	if (ray->wall_top < 0)
