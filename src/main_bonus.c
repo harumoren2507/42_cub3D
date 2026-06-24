@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: maono <maono@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/21 07:59:26 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/25 00:57:23 by maono            ###   ########.fr       */
+/*   Created: 2026/06/25 00:57:35 by maono             #+#    #+#             */
+/*   Updated: 2026/06/25 00:57:36 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include "cub3D_bonus.h"
 #include "libft.h"
 #include <X11/X.h>
 
@@ -43,8 +44,14 @@ static void	check_args(int argc, char **argv)
 
 static void	setup_hooks(t_game *game)
 {
-	mlx_hook(game->screen.win, KeyPress, KeyPressMask, key_press, game);
+	mlx_hook(game->screen.win, KeyPress, KeyPressMask, key_press_bonus, game);
 	mlx_hook(game->screen.win, KeyRelease, KeyReleaseMask, key_release, game);
+	mlx_hook(game->screen.win, EnterNotify, EnterWindowMask,
+		mouse_enter_handler, game);
+	mlx_hook(game->screen.win, MotionNotify, PointerMotionMask,
+		mouse_move_handler, game);
+	mlx_hook(game->screen.win, LeaveNotify, LeaveWindowMask,
+		mouse_leave_handler, game);
 	mlx_hook(game->screen.win, DestroyNotify, NoEventMask, window_close, game);
 	mlx_loop_hook(game->screen.mlx, frame_hook, game);
 	mlx_expose_hook(game->screen.win, frame_hook, game);
@@ -61,7 +68,9 @@ int	main(int argc, char **argv)
 	if (init_game(&game))
 		exit_error(&game, game.error_msg);
 	setup_hooks(&game);
+	mlx_mouse_hide(game.screen.mlx, game.screen.win);
 	mlx_loop(game.screen.mlx);
+	mlx_mouse_show(game.screen.mlx, game.screen.win);
 	free_game(&game);
 	return (0);
 }
