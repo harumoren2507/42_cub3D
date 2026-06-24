@@ -3,19 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retoriya <retriya@student.42.fr>           +#+  +:+       +#+        */
+/*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/21 11:37:07 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/21 11:37:14 by retoriya         ###   ########.fr       */
+/*   Created: 2026/06/24 18:40:02 by retoriya          #+#    #+#             */
+/*   Updated: 2026/06/24 18:40:06 by retoriya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-/*
-** Extract the line before the newline character from the static buffer.
-** If a newline is found, keep only the remaining part of the buffer.
-*/
 static char	*extract_line(char **buf)
 {
 	char	*nl;
@@ -67,8 +63,14 @@ char	*get_next_line(int fd)
 {
 	static char	*buf;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (BUFFER_SIZE <= 0)
 		return (NULL);
+	if (fd < 0)
+	{
+		free(buf);
+		buf = NULL;
+		return (NULL);
+	}
 	buf = fill_buffer(fd, buf);
 	if (!buf || buf[0] == '\0')
 	{

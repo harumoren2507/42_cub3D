@@ -56,6 +56,7 @@ static int	read_lines(t_game *game, int fd)
 			if (handle_line(game, line))
 			{
 				free(line);
+				get_next_line(-1);
 				return (-1);
 			}
 		}
