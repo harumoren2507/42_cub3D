@@ -34,6 +34,7 @@ SRCS		= src/main.c \
 			  src/init/init_player.c \
 			  src/parse/parse_file.c \
 			  src/parse/parse_header.c \
+			  src/parse/parse_color.c \
 			  src/parse/parse_map.c \
 			  src/parse/parse_validate.c \
 			  src/parse/parse_utils.c \

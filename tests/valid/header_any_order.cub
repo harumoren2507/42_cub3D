@@ -1,0 +1,11 @@
+C 255,255,255
+EA ./textures/block.xpm
+F 0,0,0
+WE ./textures/wall.xpm
+SO ./textures/midBlocks_01.xpm
+NO ./textures/topBlocks_01.xpm
+11111
+10001
+10E01
+10001
+11111

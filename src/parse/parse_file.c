@@ -35,7 +35,7 @@ static int	handle_line(t_game *game, char *line)
 {
 	if (game->map_row_count > 0)
 		return (map_add_row(game, line));
-	if (line[0] == CHAR_WALL || line[0] == CHAR_SPACE)
+	if (line[0] == MAP_WALL || line[0] == MAP_VOID)
 		return (map_add_row(game, line));
 	return (parse_header_line(game, line));
 }
