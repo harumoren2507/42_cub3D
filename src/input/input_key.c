@@ -12,6 +12,7 @@
 
 #include "../../inc/cub3D.h"
 #include <X11/keysym.h>
+#include <stdlib.h>
 
 static int	key_to_idx(int key)
 {
