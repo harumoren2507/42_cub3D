@@ -35,7 +35,8 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 /*
 int	main(void)
 {
-	char str1[] = "abcdefg";
+	char	str1[] = "abcdefg";
+
 	ft_memmove(str1 + 2, str1, 3);
 	printf("%s\n", str1);
 	return (0);

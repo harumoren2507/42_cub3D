@@ -75,7 +75,7 @@ int	ft_atoi(const char *str)
 
 int	main(void)
 {
-	char *s;
+	char	*s;
 
 	s = "-92233720368547758";
 	printf("org:%d\n", ft_atoi(s));

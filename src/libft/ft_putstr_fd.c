@@ -22,7 +22,7 @@ void	ft_putstr_fd(char *s, int fd)
 int	main(void)
 {
 	int	fd;
-	
+
 	fd = open("output", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 	{

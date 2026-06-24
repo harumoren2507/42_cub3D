@@ -6,11 +6,12 @@
 /*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 04:04:44 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/19 18:34:32 by retoriya         ###   ########.fr       */
+/*   Updated: 2026/06/24 01:33:02 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include <stdlib.h>
 
 void	free_map(char **map, int h)
 {

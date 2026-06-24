@@ -6,11 +6,13 @@
 /*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:53:24 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/18 08:51:58 by retoriya         ###   ########.fr       */
+/*   Updated: 2026/06/24 01:31:27 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include "libft.h"
+#include "stdlib.h"
 
 static int	parse_tex_path(t_game *game, char *line, char *id, int idx)
 {
@@ -69,8 +71,8 @@ static int	parse_rgb(t_game *game, char *str, int *color)
 	g = ft_atoi(parts[1]);
 	b = ft_atoi(parts[2]);
 	free_parts(parts);
-	if (r < RGB_MIN || r > RGB_MAX || g < RGB_MIN || g > RGB_MAX
-		|| b < RGB_MIN || b > RGB_MAX)
+	if (r < RGB_MIN || r > RGB_MAX || g < RGB_MIN || g > RGB_MAX || b < RGB_MIN
+		|| b > RGB_MAX)
 		return (set_error(game, "Color value out of range (0-255)"));
 	*color = (r << RED_SHIFT) | (g << GREEN_SHIFT) | b;
 	return (1);

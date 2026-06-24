@@ -6,11 +6,12 @@
 /*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 15:13:05 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/15 04:10:19 by retoriya         ###   ########.fr       */
+/*   Updated: 2026/06/24 01:32:17 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include <stdlib.h>
 
 int	validate_parsed(t_game *game)
 {
@@ -28,13 +29,11 @@ int	validate_parsed(t_game *game)
 
 static int	is_invalid_border(t_game *game, int y, int x)
 {
-	if (y == 0 || y == game->map_h - 1
-		|| x == 0 || x == game->map_w - 1)
+	if (y == 0 || y == game->map_h - 1 || x == 0 || x == game->map_w - 1)
 		return (1);
-	if (game->map[y - 1][x] == CHAR_SPACE
-		|| game->map[y + 1][x] == CHAR_SPACE
-		|| game->map[y][x - 1] == CHAR_SPACE
-		|| game->map[y][x + 1] == CHAR_SPACE)
+	if (game->map[y - 1][x] == CHAR_SPACE || game->map[y + 1][x] == CHAR_SPACE
+		|| game->map[y][x - 1] == CHAR_SPACE || game->map[y][x
+		+ 1] == CHAR_SPACE)
 		return (1);
 	return (0);
 }
