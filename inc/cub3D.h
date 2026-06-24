@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: maono <maono@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 09:15:23 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/24 01:34:55 by maono            ###   ########.fr       */
+/*   Updated: 2026/06/23 04:39:30 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <X11/Xlib.h>
+# include <math.h>
+# include <fcntl.h>
+# include <stdbool.h>
 # include <mlx.h>
 
 # define WINDOW_WIDTH 1280
@@ -31,8 +33,16 @@
 # define TEX_EA 3
 # define TEXTURE_COUNT 4
 
-# define MOVE_SPEED 0.05
-# define ROTATION_SPEED 0.03
+# define KEY_W     0
+# define KEY_A     1
+# define KEY_S     2
+# define KEY_D     3
+# define KEY_LEFT  4
+# define KEY_RIGHT 5
+# define KEY_COUNT 6
+
+# define MOVE_SPEED  0.05
+# define ROTATION_SPEED   0.03
 
 # define MAP_MAX_HEIGHT 1024
 
@@ -100,15 +110,14 @@ typedef struct s_player
 
 typedef struct s_screen
 {
-	void		*mlx;
-	void		*win;
-	void		*img;
-	char		*addr;
-	int			bpp;
-	int			line_len;
-	int			endian;
-	Display		*display;
-}				t_screen;
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_screen;
 
 typedef struct s_game
 {
@@ -120,6 +129,7 @@ typedef struct s_game
 	int			map_w;
 	int			ceil_color;
 	int			floor_color;
+	int			keys[KEY_COUNT];
 	char		*tex_paths[TEXTURE_COUNT];
 	int			tex_loaded[TEXTURE_COUNT];
 	int			floor_loaded;
@@ -148,8 +158,10 @@ int				load_texture(t_game *game, t_texture *tex, char *path);
 int				load_all_textures(t_game *game);
 
 /* User Input & Event Hooks */
-int				window_close(void *param);
-int				frame_hook(void *param);
+int		key_press(int key, void *param);
+int		key_release(int key, void *param);
+int		window_close(void *param);
+int		frame_hook(void *param);
 
 /* Raycasting Engine */
 void			ray_setup(t_ray *ray, t_player *player, double ray_angle);
