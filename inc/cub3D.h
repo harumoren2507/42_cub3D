@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: maono <maono@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 09:15:23 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/19 16:42:07 by retoriya         ###   ########.fr       */
+/*   Updated: 2026/06/23 04:39:30 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <math.h>
 # include <fcntl.h>
 # include <stdbool.h>
-# include <X11/Xlib.h>
 # include <mlx.h>
 # include "libft.h"
 
@@ -34,6 +33,14 @@
 # define TEX_WE   2
 # define TEX_EA   3
 # define TEXTURE_COUNT 4
+
+# define KEY_W     0
+# define KEY_A     1
+# define KEY_S     2
+# define KEY_D     3
+# define KEY_LEFT  4
+# define KEY_RIGHT 5
+# define KEY_COUNT 6
 
 # define MOVE_SPEED  0.05
 # define ROTATION_SPEED   0.03
@@ -104,14 +111,13 @@ typedef struct s_player
 
 typedef struct s_screen
 {
-	void		*mlx;
-	void		*win;
-	void		*img;
-	char		*addr;
-	int			bpp;
-	int			line_len;
-	int			endian;
-	Display		*display;
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
 }	t_screen;
 
 typedef struct s_game
@@ -124,6 +130,7 @@ typedef struct s_game
 	int			map_w;
 	int			ceil_color;
 	int			floor_color;
+	int			keys[KEY_COUNT];
 	char		*tex_paths[TEXTURE_COUNT];
 	int			tex_loaded[TEXTURE_COUNT];
 	int			floor_loaded;
@@ -152,6 +159,8 @@ int		load_texture(t_game *game, t_texture *tex, char *path);
 int		load_all_textures(t_game *game);
 
 /* User Input & Event Hooks */
+int		key_press(int key, void *param);
+int		key_release(int key, void *param);
 int		window_close(void *param);
 int		frame_hook(void *param);
 

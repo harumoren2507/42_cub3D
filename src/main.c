@@ -42,6 +42,8 @@ static void	check_args(int argc, char **argv)
 
 static void	setup_hooks(t_game *game)
 {
+	mlx_hook(game->screen.win, KeyPress, KeyPressMask, key_press, game);
+	mlx_hook(game->screen.win, KeyRelease, KeyReleaseMask, key_release, game);
 	mlx_hook(game->screen.win, DestroyNotify, 0, window_close, game);
 	mlx_loop_hook(game->screen.mlx, frame_hook, game);
 	mlx_expose_hook(game->screen.win, frame_hook, game);
