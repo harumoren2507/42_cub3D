@@ -6,11 +6,12 @@
 /*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/20 15:26:10 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/20 16:29:35 by retoriya         ###   ########.fr       */
+/*   Updated: 2026/06/24 01:32:02 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include "libft.h"
 
 int	map_add_row(t_game *game, char *line)
 {

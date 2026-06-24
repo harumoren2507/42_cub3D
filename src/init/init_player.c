@@ -6,11 +6,12 @@
 /*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/17 19:02:53 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/20 23:59:25 by retoriya         ###   ########.fr       */
+/*   Updated: 2026/06/24 01:27:53 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include <math.h>
 
 static void	set_player_angle(t_player *p, char dir)
 {

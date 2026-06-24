@@ -6,11 +6,12 @@
 /*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 12:51:39 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/22 22:35:51 by maono            ###   ########.fr       */
+/*   Updated: 2026/06/24 01:32:32 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include <stdlib.h>
 
 int	load_texture(t_game *game, t_texture *tex, char *path)
 {

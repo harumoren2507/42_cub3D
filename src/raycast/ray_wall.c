@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ray_wall.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: maono <maono@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/18 22:16:48 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/21 11:35:48 by retoriya         ###   ########.fr       */
+/*   Updated: 2026/06/23 04:23:28 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include <math.h>
 
 static void	set_wall_dist(t_ray *ray, double player_angle)
 {
@@ -49,8 +50,8 @@ static void	set_tex_x(t_ray *ray, t_player *player)
 		ray->wall_frac = player->pos_x + ray->ray_dist * ray->dir_x;
 	ray->wall_frac -= floor(ray->wall_frac);
 	ray->tex_x = (int)(ray->wall_frac * ray->texture->width);
-	if ((ray->side == SIDE_EW && ray->dir_x > 0)
-		|| (ray->side == SIDE_NS && ray->dir_y < 0))
+	if ((ray->side == SIDE_EW && ray->dir_x > 0) || (ray->side == SIDE_NS
+			&& ray->dir_y < 0))
 		ray->tex_x = ray->texture->width - ray->tex_x - 1;
 }
 

@@ -6,11 +6,14 @@
 /*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 20:01:20 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/21 03:22:55 by retoriya         ###   ########.fr       */
+/*   Updated: 2026/06/24 01:30:56 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include "libft.h"
+#include <fcntl.h>
+#include <unistd.h>
 
 static int	is_blank_line(char *line)
 {
@@ -53,6 +56,7 @@ static int	read_lines(t_game *game, int fd)
 			if (handle_line(game, line))
 			{
 				free(line);
+				get_next_line(-1);
 				return (-1);
 			}
 		}

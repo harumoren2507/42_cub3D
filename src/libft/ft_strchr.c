@@ -28,7 +28,7 @@ char	*ft_strchr(const char *s, int c)
 int	main(void)
 {
 	char	str[] = "NULL";
-	
+
 	printf("%s\n", ft_strchr(str, 65));
 	printf("%s\n", strchr(str, 65));
 }

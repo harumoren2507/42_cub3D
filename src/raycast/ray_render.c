@@ -45,8 +45,8 @@ void	ray_render_column(t_ray *ray, t_game *game, int col)
 	y = ray->wall_top;
 	while (y < ray->wall_bottom)
 	{
-		put_pixel(&game->screen, col, y,
-			get_tex_pixel(ray->texture, ray->tex_x, (int)tex_pos));
+		put_pixel(&game->screen, col, y, get_tex_pixel(ray->texture, ray->tex_x,
+				(int)tex_pos));
 		tex_pos += tex_step;
 		y++;
 	}

@@ -6,11 +6,13 @@
 /*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/13 22:25:02 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/17 01:53:57 by retoriya         ###   ########.fr       */
+/*   Updated: 2026/06/24 01:33:19 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include "libft.h"
+#include <math.h>
 
 static void	set_ray_direction(t_ray *ray, t_player *player, double ray_angle)
 {

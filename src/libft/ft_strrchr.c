@@ -32,7 +32,7 @@ char	*ft_strrchr(const char *s, int c)
 /*
 int	main(void)
 {
-	char str1[] = "xbcdeag";
+	char	str1[] = "xbcdeag";
 
 	printf("%s\n", ft_strrchr(str1, 97));
 	printf("%s\n", strrchr(str1, 97));

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include <stdlib.h>
 
 int	validate_parsed(t_game *game)
 {

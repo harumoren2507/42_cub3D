@@ -38,10 +38,10 @@ void	ft_toupper_content(void *content)
 
 int	main(void)
 {
-	t_list *head;
-	t_list *second;
-	t_list *third;
-	t_list *current;
+	t_list	*head;
+	t_list	*second;
+	t_list	*third;
+	t_list	*current;
 
 	head = ft_lstnew(strdup("Hello!"));
 	second = ft_lstnew(strdup("42Tokyo"));
