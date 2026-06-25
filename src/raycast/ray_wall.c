@@ -59,7 +59,7 @@ static void	set_wall_bounds(t_ray *ray)
 {
 	ray->wall_height = (int)(ray->dist_to_plane / ray->wall_dist);
 	ray->wall_top = WINDOW_HEIGHT / 2 - ray->wall_height / 2;
-	ray->wall_bottom = WINDOW_HEIGHT / 2 + ray->wall_height / 2;
+	ray->wall_bottom = ray->wall_top + ray->wall_height - 1;
 	if (ray->wall_top < 0)
 		ray->wall_top = 0;
 	if (ray->wall_bottom >= WINDOW_HEIGHT)
