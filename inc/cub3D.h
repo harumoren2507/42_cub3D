@@ -6,7 +6,7 @@
 /*   By: maono <maono@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 09:15:23 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/25 00:40:39 by maono            ###   ########.fr       */
+/*   Updated: 2026/06/25 18:30:06 by retoriya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,15 +118,8 @@ typedef struct s_screen
 	int			bpp;
 	int			line_len;
 	int			endian;
+
 }				t_screen;
-	void			*mlx;
-	void			*win;
-	void			*img;
-	char			*addr;
-	int				bpp;
-	int				line_len;
-	int				endian;
-}					t_screen;
 
 enum				e_state
 {
