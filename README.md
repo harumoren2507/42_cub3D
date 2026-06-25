@@ -1,7 +1,10 @@
-*This project has been created as part of the 42 curriculum by retoriya.*
+*This project has been created as part of the 42 curriculum by retoriya, maono.*
 
 ## Description
 A raycasting 3D game like Wolfenstein 3D. Renders .cub maps in real-time using miniLibX. Features include 4-direction wall textures, floor/ceiling colors, and basic player movement.
+
+## Demo
+![Demo](./cub3d.gif)
 
 ## Instructions
 Just run make to compile:

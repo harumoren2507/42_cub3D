@@ -6,7 +6,7 @@
 /*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 07:59:26 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/24 01:30:24 by maono            ###   ########.fr       */
+/*   Updated: 2026/06/25 00:57:23 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	setup_hooks(t_game *game)
 {
 	mlx_hook(game->screen.win, KeyPress, KeyPressMask, key_press, game);
 	mlx_hook(game->screen.win, KeyRelease, KeyReleaseMask, key_release, game);
-	mlx_hook(game->screen.win, DestroyNotify, 0, window_close, game);
+	mlx_hook(game->screen.win, DestroyNotify, NoEventMask, window_close, game);
 	mlx_loop_hook(game->screen.mlx, frame_hook, game);
 	mlx_expose_hook(game->screen.win, frame_hook, game);
 }

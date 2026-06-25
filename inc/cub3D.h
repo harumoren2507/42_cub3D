@@ -6,7 +6,7 @@
 /*   By: maono <maono@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 09:15:23 by retoriya          #+#    #+#             */
-/*   Updated: 2026/06/23 04:39:30 by maono            ###   ########.fr       */
+/*   Updated: 2026/06/25 00:40:39 by maono            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,22 @@
 
 typedef struct s_texture
 {
-	void		*img;
-	char		*addr;
-	int			bpp;
-	int			line_len;
-	int			endian;
-	int			width;
-	int			height;
-}				t_texture;
+	void			*img;
+	char			*addr;
+	int				bpp;
+	int				line_len;
+	int				endian;
+	int				width;
+	int				height;
+}					t_texture;
 
 typedef struct s_textures
 {
-	t_texture	north;
-	t_texture	south;
-	t_texture	east;
-	t_texture	west;
-}				t_textures;
+	t_texture		north;
+	t_texture		south;
+	t_texture		east;
+	t_texture		west;
+}					t_textures;
 
 typedef struct s_ray
 {
@@ -104,10 +104,10 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	double		pos_x;
-	double		pos_y;
-	double		angle;
-}				t_player;
+	double			pos_x;
+	double			pos_y;
+	double			angle;
+}					t_player;
 
 typedef struct s_screen
 {
@@ -119,61 +119,76 @@ typedef struct s_screen
 	int			line_len;
 	int			endian;
 }				t_screen;
+	void			*mlx;
+	void			*win;
+	void			*img;
+	char			*addr;
+	int				bpp;
+	int				line_len;
+	int				endian;
+}					t_screen;
+
+enum				e_state
+{
+	STATE_PAUSED,
+	STATE_PLAYING
+};
 
 typedef struct s_game
 {
-	t_screen	screen;
-	t_player	player;
-	t_textures	textures;
-	char		**map;
-	int			map_h;
-	int			map_w;
-	int			ceil_color;
-	int			floor_color;
-	int			keys[KEY_COUNT];
-	char		*tex_paths[TEXTURE_COUNT];
-	int			tex_loaded[TEXTURE_COUNT];
-	int			floor_loaded;
-	int			ceil_loaded;
-	char		*map_rows[MAP_MAX_HEIGHT];
-	int			map_row_count;
-	char		*error_msg;
-}				t_game;
+	t_screen		screen;
+	t_player		player;
+	t_textures		textures;
+	char			**map;
+	int				map_h;
+	int				map_w;
+	int				ceil_color;
+	int				floor_color;
+	int				keys[KEY_COUNT];
+	char			*tex_paths[TEXTURE_COUNT];
+	int				tex_loaded[TEXTURE_COUNT];
+	int				floor_loaded;
+	int				ceil_loaded;
+	char			*map_rows[MAP_MAX_HEIGHT];
+	int				map_row_count;
+	char			*error_msg;
+	enum e_state	state;
+}					t_game;
 
-int				is_whitespace(char c);
-int				parse_cub_file(t_game *game, char *path);
-int				parse_header_line(t_game *game, char *line);
-int				map_add_row(t_game *game, char *line);
-int				build_map(t_game *game);
-int				validate_map_chars(t_game *game);
-int				validate_parsed(t_game *game);
-int				validate_map_closed(t_game *game);
-void			free_parts(char **parts);
-int				count_parts(char **parts);
-int				is_num_str(char *str);
+int					is_whitespace(char c);
+int					parse_cub_file(t_game *game, char *path);
+int					parse_header_line(t_game *game, char *line);
+int					map_add_row(t_game *game, char *line);
+int					build_map(t_game *game);
+int					validate_map_chars(t_game *game);
+int					validate_parsed(t_game *game);
+int					validate_map_closed(t_game *game);
+void				free_parts(char **parts);
+int					count_parts(char **parts);
+int					is_num_str(char *str);
 
 /* Game Initialization & Textures */
-int				init_game(t_game *game);
-void			find_player_pos(t_game *game);
-int				load_texture(t_game *game, t_texture *tex, char *path);
-int				load_all_textures(t_game *game);
+int					init_game(t_game *game);
+void				find_player_pos(t_game *game);
+int					load_texture(t_game *game, t_texture *tex, char *path);
+int					load_all_textures(t_game *game);
 
 /* User Input & Event Hooks */
-int				key_press(int key, void *param);
-int				key_release(int key, void *param);
-int				window_close(void *param);
-int				frame_hook(void *param);
+int					key_press(int key, void *param);
+int					key_release(int key, void *param);
+int					window_close(void *param);
+int					frame_hook(void *param);
 
 /* Raycasting Engine */
-void			ray_setup(t_ray *ray, t_player *player, double ray_angle);
-void			ray_march_to_wall(t_ray *ray, char **map);
-void			prepare_wall_hit(t_ray *ray, t_game *game);
-void			ray_render_column(t_ray *ray, t_game *game, int col);
-int				raycast_frame(t_game *game);
+void				ray_setup(t_ray *ray, t_player *player, double ray_angle);
+void				ray_march_to_wall(t_ray *ray, char **map);
+void				prepare_wall_hit(t_ray *ray, t_game *game);
+void				ray_render_column(t_ray *ray, t_game *game, int col);
+int					raycast_frame(t_game *game);
 
 /* Memory Cleanup */
-void			free_map(char **map, int h);
-void			free_game(t_game *game);
-int				set_error(t_game *game, char *msg);
+void				free_map(char **map, int h);
+void				free_game(t_game *game);
+int					set_error(t_game *game, char *msg);
 
 #endif
