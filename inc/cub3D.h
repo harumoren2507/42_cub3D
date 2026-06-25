@@ -79,27 +79,28 @@ typedef struct s_textures
 
 typedef struct s_ray
 {
-	double			ray_angle;
-	double			ray_dist;
-	double			dir_x;
-	double			dir_y;
-	int				cell_x;
-	int				cell_y;
-	int				step_x;
-	int				step_y;
-	double			delta_x;
-	double			delta_y;
-	double			side_x;
-	double			side_y;
-	int				side;
-	double			wall_dist;
-	double			wall_frac;
-	int				wall_height;
-	int				wall_top;
-	int				wall_bottom;
-	t_texture		*texture;
-	int				tex_x;
-}					t_ray;
+	double		dist_to_plane;
+	double		ray_angle;
+	double		ray_dist;
+	double		dir_x;
+	double		dir_y;
+	int			cell_x;
+	int			cell_y;
+	int			step_x;
+	int			step_y;
+	double		delta_x;
+	double		delta_y;
+	double		side_x;
+	double		side_y;
+	int			side;
+	double		wall_dist;
+	double		wall_frac;
+	int			wall_height;
+	int			wall_top;
+	int			wall_bottom;
+	t_texture	*texture;
+	int			tex_x;
+}				t_ray;
 
 typedef struct s_player
 {
@@ -110,6 +111,14 @@ typedef struct s_player
 
 typedef struct s_screen
 {
+	void		*mlx;
+	void		*win;
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			line_len;
+	int			endian;
+}				t_screen;
 	void			*mlx;
 	void			*win;
 	void			*img;
