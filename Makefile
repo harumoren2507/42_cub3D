@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 NAME		= cub3D
+NAME_BONUS	= cub3D_bonus
 CC			= cc
 MAKEFLAGS	+= --no-print-directory
 
@@ -95,10 +96,12 @@ clean:
 	@rm -rf $(OBJ_DIR) $(DEP_DIR) $(OBJ_DIR_BONUS) $(DEP_DIR_BONUS)
 
 fclean: clean
-	@$(RM) $(LIBFT) $(MLX) $(NAME)
+	@$(RM) $(LIBFT) $(MLX) $(NAME) $(NAME_BONUS)
 
-bonus: $(LIBFT) $(MLX) $(OBJS_ALL_BONUS)
-	$(CC) $(CFLAGS) $(OBJS_ALL_BONUS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
+$(NAME_BONUS): $(LIBFT) $(MLX) $(OBJS_ALL_BONUS)
+	$(CC) $(CFLAGS) $(OBJS_ALL_BONUS) $(LDFLAGS) $(LDLIBS) -o $(NAME_BONUS)
+
+bonus: $(NAME_BONUS)
 
 re:
 	@$(MAKE) fclean
