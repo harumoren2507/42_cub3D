@@ -50,8 +50,8 @@ static void	set_tex_x(t_ray *ray, t_player *player)
 		ray->wall_frac = player->pos_x + ray->ray_dist * ray->dir_x;
 	ray->wall_frac -= floor(ray->wall_frac);
 	ray->tex_x = (int)(ray->wall_frac * ray->texture->width);
-	if ((ray->side == SIDE_EW && ray->dir_x > 0) || (ray->side == SIDE_NS
-			&& ray->dir_y < 0))
+	if ((ray->side == SIDE_EW && ray->dir_x < 0) || (ray->side == SIDE_NS
+			&& ray->dir_y > 0))
 		ray->tex_x = ray->texture->width - ray->tex_x - 1;
 }
 
